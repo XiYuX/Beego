@@ -47,27 +47,44 @@ func (c *MainController) Get() {
 //	c.Ctx.WriteString("数据校验成功")
 //}
 
-//post 请求
-func (c *MainController)Post(){
-	//解析josn格式数据
+//post请求
+////func (c *MainController)Post(){
+////	//解析josn格式数据
+////	var person models.Person
+////	data,err :=ioutil.ReadAll(c.Ctx.Request.Body)
+////	if err != nil{
+////		c.Ctx.WriteString("数据接收失败")
+////		return
+////	}
+////	err = json.Unmarshal(data,&person)
+//	if err != nil{
+//		c.Ctx.WriteString("数据解析失败")
+//		return
+//	}
+//	fmt.Println("姓名：",person.Name)
+//	fmt.Println("年龄：",person.Age)
+//	fmt.Println("性别：",person.Sex)
+//	c.Ctx.WriteString("数据解析成功")
+////}
+
+//处理post请求
+func (c *MainController) Post(){
+	//接收json请求
 	var person models.Person
-	data,err :=ioutil.ReadAll(c.Ctx.Request.Body)
+	dataByte ,err :=ioutil.ReadAll(c.Ctx.Request.Body)
 	if err != nil{
 		c.Ctx.WriteString("数据接收失败")
 		return
 	}
-	err = json.Unmarshal(data,&person)
+	//进行数据校验
+	err = json.Unmarshal(dataByte,&person)
 	if err != nil{
 		c.Ctx.WriteString("数据解析失败")
 		return
 	}
 	fmt.Println("姓名：",person.Name)
-	fmt.Println("年龄：",person.Age)
-	fmt.Println("性别：",person.Sex)
+	fmt.Println("生日：",person.Brithday)
+	fmt.Println("住址：",person.Address)
+	fmt.Println("昵称：",person.Nick)
 	c.Ctx.WriteString("数据解析成功")
-}
-
-//处理delete请求
-func (c *MainController) Delete(){
-
 }
