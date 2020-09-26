@@ -1,6 +1,7 @@
 package controllers
 
 import (
+
 	"BeegoPackage0922/models"
 	"encoding/json"
 	"fmt"
@@ -12,30 +13,7 @@ type MainController struct {
 	beego.Controller//匿名字段
 }
 
-type NewController struct {
-	beego.Controller
-}
-//该方法用于处理post请求
-func (c *NewController) Post(){
-	//接收json请求
-	var person models.NewPerson
-	dataByte ,err :=ioutil.ReadAll(c.Ctx.Request.Body)
-	if err != nil{
-		c.Ctx.WriteString("数据接收失败")
-		return
-	}
-	//进行数据校验
-	err = json.Unmarshal(dataByte,&person)
-	if err != nil{
-		c.Ctx.WriteString("数据解析失败")
-		return
-	}
-	fmt.Println("姓名：",person.Name)
-	fmt.Println("生日：",person.Brithday)
-	fmt.Println("住址：",person.Address)
-	fmt.Println("昵称：",person.Nick)
-	c.Ctx.WriteString("数据解析成功")
-}
+
 func (c *MainController) Get() {
 	//1、获取请求数据
 	user := c.Ctx.Input.Query("user")

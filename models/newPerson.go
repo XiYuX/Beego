@@ -5,4 +5,5 @@ type NewPerson struct {
 	Brithday string
 	Address string
 	Nick string
+	Password string
 }
